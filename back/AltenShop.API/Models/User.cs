@@ -7,4 +7,5 @@ public class User
     public string Firstname { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty; 
+    public List<CartItem> Cart { get; set; } = new();
 }

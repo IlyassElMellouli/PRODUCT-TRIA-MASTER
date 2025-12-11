@@ -31,6 +31,22 @@
       "Rating": 0,
       "CreatedAt": 1765483554,
       "UpdatedAt": 1765483554
+    },
+    {
+      "Id": 3,
+      "Code": "",
+      "Name": "Logitech keyboard",
+      "Description": "Clavier m\u00E9canique cherry switches ",
+      "Image": "",
+      "Category": "Electronics",
+      "Price": 399,
+      "Quantity": 0,
+      "InternalReference": "",
+      "ShellId": 0,
+      "InventoryStatus": "INSTOCK",
+      "Rating": 0,
+      "CreatedAt": 1765487748,
+      "UpdatedAt": 1765487748
     }
   ],
   "Users": [
@@ -39,21 +55,41 @@
       "Username": "ilyass",
       "Firstname": "ilyass",
       "Email": "ilyass@gmail.com",
-      "Password": "$2a$11$tU1wgloAbLH91NrzBH06iepdzUAynf2dLLnxmPJlsHlMhsbmxa85G"
+      "Password": "$2a$11$tU1wgloAbLH91NrzBH06iepdzUAynf2dLLnxmPJlsHlMhsbmxa85G",
+      "Cart": []
     },
     {
       "Id": 2,
       "Username": "",
       "Firstname": "",
       "Email": "admin@admin.com",
-      "Password": "$2a$11$NCyVxCwBIxheTyH7GwCgSu5M96uVEv6FUPU6ZqtgvS5EIy0cPHVE2"
+      "Password": "$2a$11$NCyVxCwBIxheTyH7GwCgSu5M96uVEv6FUPU6ZqtgvS5EIy0cPHVE2",
+      "Cart": []
     },
     {
       "Id": 3,
       "Username": "heisenberg",
       "Firstname": "Walter W",
       "Email": "walterwhite@gmail.com",
-      "Password": "$2a$11$Zx6s2h8EsR4OFEenIGg0L.zOTcwbkPJRKlFjDryS6SEjmuIuPp2LO"
+      "Password": "$2a$11$Zx6s2h8EsR4OFEenIGg0L.zOTcwbkPJRKlFjDryS6SEjmuIuPp2LO",
+      "Cart": []
+    },
+    {
+      "Id": 4,
+      "Username": "ilyassito",
+      "Firstname": "ilyass",
+      "Email": "ilyass@mail.com",
+      "Password": "$2a$11$DOLeH99qvzbX441A6d.vwOj6/K4QJYscR5NAZxWUjUSs1MJH0NxcG",
+      "Cart": [
+        {
+          "ProductId": 1,
+          "Quantity": 2
+        },
+        {
+          "ProductId": 2,
+          "Quantity": 1
+        }
+      ]
     }
   ]
 }

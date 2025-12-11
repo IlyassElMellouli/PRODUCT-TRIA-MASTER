@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'environments/environment';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -39,4 +40,17 @@ export class AuthService {
     this.loggedIn.next(false);
     this.emailSubject.next(null);
   }
+
+  isAdmin(): boolean {
+        const token = localStorage.getItem('token');
+        if (!token) return false;
+
+        try {
+            const decodedToken: any = jwtDecode(token);
+            return decodedToken.email === 'admin@admin.com'; 
+        } catch (error) {
+            console.error("Erreur de décodage JWT", error);
+            return false;
+        }
+    }
 }

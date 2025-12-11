@@ -1,6 +1,11 @@
 <h1 class="text-center">Liste des produits</h1>
 
-<p-button label="Créer produit" (onClick)="onCreate()" class="block text-center"/>
+<p-button 
+    *ngIf="authService.isAdmin()" 
+    label="Créer produit" 
+    (onClick)="onCreate()" 
+    class="block text-center"
+/>
 
 <p-dataView #dv [value]="products()">
     <ng-template pTemplate="list" let-products>
@@ -10,9 +15,13 @@
                 <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
 
                 <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
+                    <div class="flex gap-3 mt-1" *ngIf="authService.isAdmin()">
                         <p-button label="Modifier" severity="secondary" (onClick)="onUpdate(product)"/>
                         <p-button label="Supprimer" severity="danger" (onClick)="onDelete(product)" />
+                    </div>
+                
+                    <div class="flex mt-1" *ngIf="!authService.isAdmin()">
+                         <p-button label="Ajouter au panier" severity="primary" (onClick)="onAddToCart(product)" />
                     </div>
                 </ng-template>
             </p-card>
