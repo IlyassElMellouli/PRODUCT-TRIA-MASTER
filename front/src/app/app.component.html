@@ -9,8 +9,6 @@
 
     <div class="p-toolbar-group-end flex align-items-center gap-3">
         
-        <i class="pi pi-shopping-cart cursor-pointer mr-3" style="font-size: 2rem"></i>
-
         <ng-container *ngIf="!(isLoggedIn$ | async)">
             <button 
                 class="auth-btn login-btn" 
@@ -24,15 +22,16 @@
             </button>
         </ng-container>
 
-        <ng-container *ngIf="(isLoggedIn$ | async)">
-            <span class="user-badge">👤 Connecté</span>
+        <ng-container *ngIf="email$ | async as email">
+            <span class="user-badge">👤 {{ email }}</span>
             <button 
                 class="auth-btn logout-btn" 
                 (click)="logout()">
                 Déconnexion
             </button>
         </ng-container>
-
+        
+    <i class="pi pi-shopping-cart cursor-pointer mr-3" style="font-size: 2rem"></i>
     </div>
 </p-toolbar>
 

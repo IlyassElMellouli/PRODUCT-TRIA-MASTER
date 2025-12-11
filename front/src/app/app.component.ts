@@ -20,8 +20,8 @@ export class AppComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  // Observable pour savoir si on est connecté (pour le HTML)
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
+  email$: Observable<string | null> = this.authService.email$;
 
   logout() {
     this.authService.logout();

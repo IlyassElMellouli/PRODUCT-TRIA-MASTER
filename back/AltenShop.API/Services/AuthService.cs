@@ -11,26 +11,36 @@ namespace AltenShop.API.Services;
 
 public class AuthService : IAuthService
 {
-    private readonly ShopContext _context;
+    private readonly JsonDbService _db; 
     private readonly IConfiguration _config;
 
-    public AuthService(ShopContext context, IConfiguration config)
+    public AuthService(JsonDbService db, IConfiguration config)
     {
-        _context = context;
+        _db = db;
         _config = config;
     }
 
     public async Task<string> Register(User user)
     {
+        // Vérif email unique
+        if (_db.Store.Users.Any(u => u.Email == user.Email)) 
+            throw new Exception("Email déjà pris");
+
+        // ID Auto-increment
+        user.Id = _db.Store.Users.Any() ? _db.Store.Users.Max(u => u.Id) + 1 : 1;
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
+
+        _db.Store.Users.Add(user);
+        _db.SaveChanges(); // Sauvegarde JSON
+
         return "User created";
     }
 
     public async Task<string?> Login(string email, string password)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        // Recherche en mémoire (LINQ simple)
+        var user = _db.Store.Users.FirstOrDefault(u => u.Email == email);
+        
         if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
             return null;
 

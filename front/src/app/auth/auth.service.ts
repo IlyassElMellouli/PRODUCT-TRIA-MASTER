@@ -6,26 +6,30 @@ import { environment } from 'environments/environment';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly API_URL = environment.apiURL;
-  // Permet aux composants de savoir si on est connecté en temps réel
+  
   private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token')); 
+  private emailSubject = new BehaviorSubject<string | null>(null);
+  email$ = this.emailSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
   get isLoggedIn$() {
     return this.loggedIn.asObservable();
   }
-
-  // Création de compte
+  setEmail(email: string) {
+    this.emailSubject.next(email);
+  }
+  
   register(user: any): Observable<any> {
     return this.http.post(`${this.API_URL}/account`, user);
   }
 
-  // Connexion
   login(credentials: { email: string; password: string }): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(`${this.API_URL}/token`, credentials).pipe(
       tap(response => {
         localStorage.setItem('token', response.token);
         this.loggedIn.next(true);
+        this.setEmail(credentials.email)
       })
     );
   }
@@ -33,5 +37,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
+    this.emailSubject.next(null);
   }
 }

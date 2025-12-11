@@ -1,0 +1,59 @@
+{
+  "Products": [
+    {
+      "Id": 1,
+      "Code": "",
+      "Name": "Macbook pro 13",
+      "Description": "Mac 13 pouce puce M4",
+      "Image": "",
+      "Category": "Electronics",
+      "Price": 2999,
+      "Quantity": 0,
+      "InternalReference": "",
+      "ShellId": 0,
+      "InventoryStatus": "INSTOCK",
+      "Rating": 0,
+      "CreatedAt": 1765483516,
+      "UpdatedAt": 1765483516
+    },
+    {
+      "Id": 2,
+      "Code": "",
+      "Name": "MX Master 3",
+      "Description": "Souris sans fil",
+      "Image": "",
+      "Category": "Electronics",
+      "Price": 299,
+      "Quantity": 0,
+      "InternalReference": "",
+      "ShellId": 0,
+      "InventoryStatus": "INSTOCK",
+      "Rating": 0,
+      "CreatedAt": 1765483554,
+      "UpdatedAt": 1765483554
+    }
+  ],
+  "Users": [
+    {
+      "Id": 1,
+      "Username": "ilyass",
+      "Firstname": "ilyass",
+      "Email": "ilyass@gmail.com",
+      "Password": "$2a$11$tU1wgloAbLH91NrzBH06iepdzUAynf2dLLnxmPJlsHlMhsbmxa85G"
+    },
+    {
+      "Id": 2,
+      "Username": "",
+      "Firstname": "",
+      "Email": "admin@admin.com",
+      "Password": "$2a$11$NCyVxCwBIxheTyH7GwCgSu5M96uVEv6FUPU6ZqtgvS5EIy0cPHVE2"
+    },
+    {
+      "Id": 3,
+      "Username": "heisenberg",
+      "Firstname": "Walter W",
+      "Email": "walterwhite@gmail.com",
+      "Password": "$2a$11$Zx6s2h8EsR4OFEenIGg0L.zOTcwbkPJRKlFjDryS6SEjmuIuPp2LO"
+    }
+  ]
+}
