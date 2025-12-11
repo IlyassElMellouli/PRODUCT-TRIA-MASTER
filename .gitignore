@@ -1,0 +1,78 @@
+###########################
+## 1. Exclusions Globales (OS, IDE, etc.)
+###########################
+*.[oa]
+*.lo
+*.la
+*.pyc
+*.swp
+*~
+.DS_Store
+.vscode/
+
+###########################
+## 2. Exclusions BACKEND (.NET Core / C#)
+###########################
+# Build results
+[Bb]in/
+[Oo]bj/
+# VS Code / IDE (MacOS)
+.vs/
+
+# Packages NuGet
+**/*.nuget
+**/project.nuget.cache
+**/packages/**/*.nupkg
+**/packages/**/*.zip
+# Restore/Tools
+.config/
+packages/
+*.suo
+*.user
+*.pdb
+*.Designer.cs.log
+
+# Entity Framework Core Migrations
+# Si tu veux que tes migrations (les fichiers .cs) soient incluses, retire cette ligne.
+# Sinon, ceci ignore les fichiers de migration générés.
+# **/Migrations/*.cs 
+
+# Base de données locale (SQLite)
+# shop.db ou tout autre fichier .db ou .mdf si tu utilisais SQL Server LocalDB
+*.db
+*.mdf
+*.ldf
+
+# Fichiers de log
+*.log
+
+###########################
+## 3. Exclusions FRONTEND (Angular)
+###########################
+/front/node_modules
+/front/dist
+/front/out-tsc
+/front/tmp
+
+# Logs et coverage
+/front/npm-debug.log
+/front/coverage
+
+# Fichiers de configuration spécifiques à l'utilisateur
+/front/src/app/**/*.js
+/front/src/app/**/*.map
+/front/.angular/cache
+
+# Fichiers de test (si non souhaité)
+/front/karma.conf.js
+/front/tsconfig.spec.json
+
+###########################
+## 4. Dossiers de Projets
+###########################
+# Garder cette section pour que les builds n'interfèrent pas
+# Si tes dossiers sont "back" et "front", tu pourrais vouloir spécifier :
+/back/**/[Bb]in/
+/back/**/[Oo]bj/
+/front/node_modules/
+/front/dist/
