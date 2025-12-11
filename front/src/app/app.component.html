@@ -1,0 +1,52 @@
+<p-toolbar [style]="{ height: '100px' }">
+    <div class="p-toolbar-group-start">
+        <img src="assets/icons/icon-72x72.png" alt="logo" />
+    </div>
+
+    <div class="p-toolbar-group-center">
+        <span class="font-bold text-2xl">{{ title }}</span>
+    </div>
+
+    <div class="p-toolbar-group-end flex align-items-center gap-3">
+        
+        <i class="pi pi-shopping-cart cursor-pointer mr-3" style="font-size: 2rem"></i>
+
+        <ng-container *ngIf="!(isLoggedIn$ | async)">
+            <button 
+                class="auth-btn login-btn" 
+                routerLink="/login">
+                Log In
+            </button>
+            <button 
+                class="auth-btn register-btn" 
+                routerLink="/register">
+                Sign Up
+            </button>
+        </ng-container>
+
+        <ng-container *ngIf="(isLoggedIn$ | async)">
+            <span class="user-badge">👤 Connecté</span>
+            <button 
+                class="auth-btn logout-btn" 
+                (click)="logout()">
+                Déconnexion
+            </button>
+        </ng-container>
+
+    </div>
+</p-toolbar>
+
+<p-splitter 
+    [panelSizes]="[20, 80]" 
+    [style]="{ height: 'calc(100vh - 100px)' }">
+    <ng-template pTemplate>
+        <div class="w-full">
+            <app-panel-menu />
+        </div>
+    </ng-template>
+    <ng-template pTemplate>
+        <div class="w-full app-content">
+            <router-outlet></router-outlet>
+        </div>
+    </ng-template>
+</p-splitter>

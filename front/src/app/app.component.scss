@@ -1,0 +1,41 @@
+.app-content {
+    overflow: hidden;
+    height: 100%;
+}
+.auth-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 0.5rem;
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.8; }
+}
+
+.login-btn {
+  background-color: transparent;
+  color: #333;
+  border: 1px solid #333;
+}
+
+.register-btn {
+  background-color: #333;
+  color: white;
+}
+
+.logout-btn {
+  background-color: #dc3545; /* Rouge */
+  color: white;
+}
+
+.user-badge {
+  margin-right: 1rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.logo {
+  font-size: 1.5rem;
+}
