@@ -31,6 +31,7 @@ public class AuthController : ControllerBase
         if (tokenString == null) 
             return Unauthorized(new { message = "Identifiants invalides" });
         
+        //not used in front
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true, 
@@ -42,7 +43,7 @@ public class AuthController : ControllerBase
         Response.Cookies.Append("jwt_token", tokenString, cookieOptions);
 
         return Ok(new { 
-            token = tokenString, 
+            token = tokenString, //demandé
             email = request.Email, 
             message = "Connexion réussie. Le token est dans le corps et dans le cookie."
         });
