@@ -1,6 +1,7 @@
 using AltenShop.API.Models;
 using AltenShop.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims; // Pour potentiellement lire l'email après génération
 
 namespace AltenShop.API.Controllers;
 
@@ -25,10 +26,25 @@ public class AuthController : ControllerBase
     [HttpPost("token")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
-        var token = await _authService.Login(request.Email, request.Password);
-        if (token == null) return Unauthorized(new { message = "Identifiants invalides" });
-        return Ok(new { token });
+        var tokenString = await _authService.Login(request.Email, request.Password);
+        
+        if (tokenString == null) 
+            return Unauthorized(new { message = "Identifiants invalides" });
+        
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true, 
+            Expires = DateTime.UtcNow.AddDays(7), 
+            Secure = false, 
+            SameSite = SameSiteMode.Strict, 
+        };
+
+        Response.Cookies.Append("jwt_token", tokenString, cookieOptions);
+
+        return Ok(new { 
+            token = tokenString, 
+            email = request.Email, 
+            message = "Connexion réussie. Le token est dans le corps et dans le cookie."
+        });
     }
 }
-
-public class LoginRequest { public string Email { get; set; } = ""; public string Password { get; set; } = ""; }

@@ -100,6 +100,10 @@
         {
           "ProductId": 1,
           "Quantity": 1
+        },
+        {
+          "ProductId": 2,
+          "Quantity": 1
         }
       ]
     },

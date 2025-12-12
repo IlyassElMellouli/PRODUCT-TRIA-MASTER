@@ -1,0 +1,59 @@
+<div class="contact-container p-4">
+    <h2>Nous Contacter</h2>
+    <p>Utilisez le formulaire ci-dessous pour nous envoyer votre message.</p>
+
+    @if (successMessage) {
+        <p-message severity="success" [text]="successMessage" class="w-full mb-3"></p-message>
+    }
+
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="p-fluid">
+        
+        <div class="field mb-3">
+            <label for="email">Votre Email</label>
+            <input 
+                id="email" 
+                type="text" 
+                pInputText 
+                formControlName="email" 
+                [ngClass]="{'ng-invalid ng-dirty': controls['email'].invalid && controls['email'].touched}"
+            />
+            @if (controls['email'].invalid && controls['email'].touched) {
+                <small class="p-error block mt-1">
+                    @if (controls['email'].errors?.['required']) {
+                        Email est obligatoire.
+                    } @else if (controls['email'].errors?.['email']) {
+                        Format d'email invalide.
+                    }
+                </small>
+            }
+        </div>
+
+        <div class="field mb-3">
+            <label for="message">Votre Message</label>
+            <textarea 
+                id="message" 
+                pInputTextarea 
+                formControlName="message" 
+                [rows]="5" 
+                [ngClass]="{'ng-invalid ng-dirty': controls['message'].invalid && controls['message'].touched}"
+            ></textarea>
+            @if (controls['message'].invalid && controls['message'].touched) {
+                <small class="p-error block mt-1">
+                    @if (controls['message'].errors?.['required']) {
+                        Message est obligatoire.
+                    } @else if (controls['message'].errors?.['maxlength']) {
+                        Le message ne doit pas dépasser 300 caractères (actuel : {{ controls['message'].value.length }}).
+                    }
+                </small>
+            }
+        </div>
+
+        <p-button 
+            label="Envoyer" 
+            icon="pi pi-send" 
+            type="submit" 
+            [disabled]="contactForm.invalid"
+        />
+
+    </form>
+</div>
