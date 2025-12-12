@@ -39,3 +39,22 @@
 .logo {
   font-size: 1.5rem;
 }
+.cart-icon-container {
+    position: relative;
+    cursor: pointer;
+    // Pour que le badge n'interfère pas avec les boutons Auth si la place manque
+    margin-right: 1.5rem; 
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px; // Ajuste la hauteur
+    right: 15px; // Ajuste la position horizontale par rapport à l'icône
+    border-radius: 50%;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
+    background-color: #e74c3c; // Couleur rouge PrimeNG (danger)
+    color: white;
+    font-weight: bold;
+    z-index: 10;
+}

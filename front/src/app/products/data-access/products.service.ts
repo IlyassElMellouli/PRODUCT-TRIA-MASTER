@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from "@angular/core";
 import { Product } from "./product.model";
 import { HttpClient } from "@angular/common/http";
-import { catchError, Observable, of, tap } from "rxjs";
+import { catchError, Observable, of, tap, BehaviorSubject } from "rxjs";
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -15,6 +15,9 @@ import { environment } from 'environments/environment';
 
     public readonly products = this._products.asReadonly();
 
+    private productsSubject = new BehaviorSubject<Product[]>([]);
+    products$ = this.productsSubject.asObservable();
+    
     public get(): Observable<Product[]> {
         return this.http.get<Product[]>(this.path).pipe(
             catchError((error) => {
@@ -50,6 +53,11 @@ import { environment } from 'environments/environment';
                 return of(true);
             }),
             tap(() => this._products.update(products => products.filter(product => product.id !== productId))),
+        );
+    }
+    loadProducts(): void {
+        this.http.get<Product[]>(`${environment.apiURL}/products`).subscribe(
+            products => this.productsSubject.next(products)
         );
     }
 }

@@ -22,18 +22,32 @@
             </button>
         </ng-container>
 
-        <ng-container *ngIf="email$ | async as email">
-            <span class="user-badge">👤 {{ email }}</span>
-            <button 
-                class="auth-btn logout-btn" 
-                (click)="logout()">
-                Déconnexion
-            </button>
-        </ng-container>
+        <ng-container *ngIf="isLoggedIn$ | async">
+        <span class="user-badge">👤 {{ email$ | async }}</span> 
+        <button 
+            class="auth-btn logout-btn" 
+            (click)="logout()">
+            Déconnexion
+        </button>
+    </ng-container>
         
-    <i class="pi pi-shopping-cart cursor-pointer mr-3" style="font-size: 2rem"></i>
+    <<div class="cart-icon-container" (click)="openCartDialog()">
+            <i class="pi pi-shopping-cart cursor-pointer mr-3" style="font-size: 2rem"></i>
+            
+            <span class="p-badge p-badge-danger cart-badge" 
+            *ngIf="cartTotalQuantity$ | async as total">
+            <ng-container *ngIf="total > 0">
+                {{ total }}
+            </ng-container>
+            </span>
+    </div>
     </div>
 </p-toolbar>
+
+<app-cart-dialog 
+    [isVisible]="isCartDialogOpen" 
+    (close)="closeCartDialog()"
+/>
 
 <p-splitter 
     [panelSizes]="[20, 80]" 

@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'environments/environment';
 import { jwtDecode } from 'jwt-decode';
+import { CartService } from 'app/cart/data-access/cart.service';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly API_URL = environment.apiURL;
   
   private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token')); 
-  private emailSubject = new BehaviorSubject<string | null>(null);
+  private emailSubject = new BehaviorSubject<string | null>(localStorage.getItem('user_email'));
+  private cartService = inject(CartService);
+
   email$ = this.emailSubject.asObservable();
 
   constructor(private http: HttpClient) {}
@@ -30,7 +34,10 @@ export class AuthService {
       tap(response => {
         localStorage.setItem('token', response.token);
         this.loggedIn.next(true);
+        localStorage.setItem('user_email', credentials.email);
         this.setEmail(credentials.email)
+
+        this.cartService.loadCart();
       })
     );
   }
@@ -39,6 +46,8 @@ export class AuthService {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
     this.emailSubject.next(null);
+
+    this.cartService.clearCart();
   }
 
   isAdmin(): boolean {

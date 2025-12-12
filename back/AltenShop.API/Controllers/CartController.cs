@@ -58,23 +58,19 @@ public class CartController : ControllerBase
             
             if (user == null) return Unauthorized();
 
-            // 1. Chercher si l'item est déjà dans le panier
             var existingItem = user.Cart.FirstOrDefault(ci => ci.ProductId == item.ProductId);
 
             if (existingItem != null)
             {
-                // Si oui, on met à jour la quantité
                 existingItem.Quantity += item.Quantity;
             }
             else
             {
-                // Si non, on ajoute le nouvel item
                 user.Cart.Add(item);
             }
 
-            _db.SaveChanges(); // Sauvegarde dans le fichier JSON
+            _db.SaveChanges(); 
             
-            // On renvoie 200 OK avec le panier mis à jour
             return Ok(user.Cart);
         }
         catch (UnauthorizedAccessException)
@@ -82,4 +78,37 @@ public class CartController : ControllerBase
             return Unauthorized();
         }
     }
+
+    [HttpDelete("{productId}")]
+[Authorize]
+public IActionResult RemoveFromCart(int productId, [FromQuery] int? quantity)
+{
+    try
+    {
+        var userId = GetCurrentUserId();
+        var user = _db.Store.Users.FirstOrDefault(u => u.Id == userId);
+
+        if (user == null) return Unauthorized();
+
+        var existingItem = user.Cart.FirstOrDefault(ci => ci.ProductId == productId);
+
+        if (existingItem == null) return NotFound("Product not found in cart.");
+
+        if (quantity.HasValue && quantity.Value < existingItem.Quantity)
+        {
+            existingItem.Quantity -= quantity.Value;
+        }
+        else
+        {
+            user.Cart.Remove(existingItem);
+        }
+
+        _db.SaveChanges();
+        return Ok(user.Cart); 
+    }
+    catch (UnauthorizedAccessException)
+    {
+        return Unauthorized();
+    }
+}
 }

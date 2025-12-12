@@ -47,6 +47,22 @@
       "Rating": 0,
       "CreatedAt": 1765487748,
       "UpdatedAt": 1765487748
+    },
+    {
+      "Id": 4,
+      "Code": "",
+      "Name": "4K Dell monitor",
+      "Description": "Ecran 4K 27pouces",
+      "Image": "",
+      "Category": "Electronics",
+      "Price": 399,
+      "Quantity": 0,
+      "InternalReference": "",
+      "ShellId": 0,
+      "InventoryStatus": "INSTOCK",
+      "Rating": 0,
+      "CreatedAt": 1765546266,
+      "UpdatedAt": 1765546266
     }
   ],
   "Users": [
@@ -83,10 +99,31 @@
       "Cart": [
         {
           "ProductId": 1,
+          "Quantity": 1
+        }
+      ]
+    },
+    {
+      "Id": 5,
+      "Username": "username",
+      "Firstname": "User1",
+      "Email": "user@mail.com",
+      "Password": "$2a$11$CSca3bLqgVqUx4E9q13FI.aTB6i62VtDt6jqJ4nCKzpFfyUJ9Po5K",
+      "Cart": [
+        {
+          "ProductId": 1,
           "Quantity": 2
         },
         {
           "ProductId": 2,
+          "Quantity": 1
+        },
+        {
+          "ProductId": 3,
+          "Quantity": 1
+        },
+        {
+          "ProductId": 4,
           "Quantity": 1
         }
       ]
