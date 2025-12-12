@@ -16,6 +16,8 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
+    public class LoginRequest { public string Email { get; set; } = ""; public string Password { get; set; } = ""; }
+
     [HttpPost("account")]
     public async Task<IActionResult> Register(User user)
     {
